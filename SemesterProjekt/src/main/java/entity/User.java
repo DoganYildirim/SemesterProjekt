@@ -130,6 +130,14 @@ public class User implements Serializable {
     public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
+    public Place getPlace() {
+        return place;
+    }
 
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+    
+}
     
 }
