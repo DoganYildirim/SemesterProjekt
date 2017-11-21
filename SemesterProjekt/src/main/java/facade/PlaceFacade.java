@@ -75,4 +75,33 @@ public class PlaceFacade {
         
     }
     
+      public void deletePlace(long id){
+        EntityManager em = getEntityManager();
+        
+        em.getTransaction().begin();
+        Query query = em.createQuery("DELETE FROM  Place p Where p.id = :ID");
+        query.setParameter("ID", id).executeUpdate();
+        
+        em.getTransaction().commit();
+        em.close();
+    }
+    
+    public void editPlace(long id,String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip){
+       EntityManager em = getEntityManager();
+       em.getTransaction().begin();
+       Place placeToEdit = em.find(Place.class, id);
+       placeToEdit.setOwner(owner);
+       placeToEdit.setAdress(adress);
+       placeToEdit.setNumberOfRooms(numberOfRooms);
+       placeToEdit.setNumberOfPersons(numberOfPersons);
+       placeToEdit.setDescription(description);
+       placeToEdit.setPets(pets);
+       placeToEdit.setRented(rented);
+       placeToEdit.setZip(zip);
+       
+        em.getTransaction().commit();
+        em.close();
+          
+    }
+    
 }
