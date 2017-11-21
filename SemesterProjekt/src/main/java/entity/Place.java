@@ -46,7 +46,7 @@ public class Place implements Serializable {
     @ManyToOne (cascade = CascadeType.PERSIST)
     private Zip zip;
     
-    @OneToMany(mappedBy = "place")
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
     List<User> users = new ArrayList();
     
     @OneToMany(mappedBy = "place")
