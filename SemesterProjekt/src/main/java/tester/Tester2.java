@@ -5,11 +5,14 @@
  */
 package tester;
 
+import entity.Place;
 import entity.Zip;
 import enums.Pets;
 import enums.Rented;
 import facade.PlaceFacade;
 import facade.UserFacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -32,6 +35,13 @@ public class Tester2 {
         
         pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
         
+         List<Place> places = new ArrayList();
+         places = pf.getAllPlaces();
+        for (int i = 0; i < places.size(); i++) {
+            
+            System.out.println(places.get(i).getAdress());
+            
+        }
         
     }
 }
