@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Place place;
 
 
