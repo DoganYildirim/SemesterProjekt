@@ -5,8 +5,10 @@
  */
 package tester;
 
+import entity.User;
 import facade.UserFacade;
-import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -20,8 +22,14 @@ public class Tester2 {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
         
-        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+       uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+       List<User> listen = new ArrayList();
+       listen = uf.getAllUsers();
+        System.out.println("mennesker der er så mange " + listen.size());
         
-        
+        for (int i = 0; i < listen.size(); i++)
+        {
+            System.out.println(listen.get(i).getfName());
+        }
     }
 }
