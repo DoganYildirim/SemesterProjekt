@@ -28,20 +28,25 @@ public class Tester2 {
         PlaceFacade pf = new PlaceFacade(emf);
         
         Zip zip = new Zip();
-        zip.setZipCode(2635);
+        zip.setZipCode(2000);
        
         
-        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
-        
-        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
-        
-         List<Place> places = new ArrayList();
-         places = pf.getAllPlaces();
-        for (int i = 0; i < places.size(); i++) {
-            
-            System.out.println(places.get(i).getAdress());
-            
-        }
+//        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+//        
+//        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
+//        
+//         List<Place> places = new ArrayList();
+//         places = pf.getAllPlaces();
+//        for (int i = 0; i < places.size(); i++) {
+//            
+//            System.out.println(places.get(i).getAdress());
+//            
+//        }
+
+//pf.deletePlace(1);
+pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
         
     }
 }
+
+
