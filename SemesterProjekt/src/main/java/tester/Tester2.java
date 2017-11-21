@@ -5,11 +5,15 @@
  */
 package tester;
 
+<<<<<<< HEAD
+import entity.User;
+=======
 import entity.Place;
 import entity.Zip;
 import enums.Pets;
 import enums.Rented;
 import facade.PlaceFacade;
+>>>>>>> origin/master
 import facade.UserFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,12 @@ public class Tester2 {
         UserFacade uf = new UserFacade(emf);
         PlaceFacade pf = new PlaceFacade(emf);
         
+<<<<<<< HEAD
+       uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+       List<User> listen = new ArrayList();
+       listen = uf.getAllUsers();
+        System.out.println("mennesker der er så mange " + listen.size());
+=======
         Zip zip = new Zip();
         zip.setZipCode(2000);
        
@@ -45,7 +55,12 @@ public class Tester2 {
 
 //pf.deletePlace(1);
 pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
+>>>>>>> origin/master
         
+        for (int i = 0; i < listen.size(); i++)
+        {
+            System.out.println(listen.get(i).getfName());
+        }
     }
 }
 
