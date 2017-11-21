@@ -9,9 +9,11 @@ import entity.Place;
 import entity.Zip;
 import enums.Pets;
 import enums.Rented;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -58,10 +60,16 @@ public class PlaceFacade {
         em.persist(place);
         em.getTransaction().commit();
         em.close();
+
+    }
+    
+    public List getAllPlaces(){
         
-        
-        
-        
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        Query query = em.createQuery("Select p from Place as p", Place.class);
+        List <Place> places = query.getResultList();
+        return places;
         
         
         
