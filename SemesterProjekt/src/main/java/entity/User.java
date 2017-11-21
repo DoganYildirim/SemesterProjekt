@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User implements Serializable {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Place place;
 
 
@@ -130,6 +130,14 @@ public class User implements Serializable {
     public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
+    public Place getPlace() {
+        return place;
+    }
 
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+    
+}
     
 }

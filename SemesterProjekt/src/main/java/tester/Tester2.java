@@ -5,7 +5,15 @@
  */
 package tester;
 
+<<<<<<< HEAD
 import entity.User;
+=======
+import entity.Place;
+import entity.Zip;
+import enums.Pets;
+import enums.Rented;
+import facade.PlaceFacade;
+>>>>>>> origin/master
 import facade.UserFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +29,33 @@ public class Tester2 {
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
+        PlaceFacade pf = new PlaceFacade(emf);
         
+<<<<<<< HEAD
        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
        List<User> listen = new ArrayList();
        listen = uf.getAllUsers();
         System.out.println("mennesker der er så mange " + listen.size());
+=======
+        Zip zip = new Zip();
+        zip.setZipCode(2000);
+       
+        
+//        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+//        
+//        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
+//        
+//         List<Place> places = new ArrayList();
+//         places = pf.getAllPlaces();
+//        for (int i = 0; i < places.size(); i++) {
+//            
+//            System.out.println(places.get(i).getAdress());
+//            
+//        }
+
+//pf.deletePlace(1);
+pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
+>>>>>>> origin/master
         
         for (int i = 0; i < listen.size(); i++)
         {
@@ -33,3 +63,5 @@ public class Tester2 {
         }
     }
 }
+
+

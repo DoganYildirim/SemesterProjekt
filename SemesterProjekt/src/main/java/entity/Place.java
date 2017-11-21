@@ -10,6 +10,7 @@ import enums.Rented;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,26 +25,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Place implements Serializable {
 
-    /**
-     * @return the zip
-     */
-    public Zip getZip() {
-        return zip;
-    }
-
-    /**
-     * @param zip the zip to set
-     */
-    public void setZip(Zip zip) {
-        this.zip = zip;
-    }
-
-    @ManyToOne
-    private Zip zip;
+ 
+    
+   
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
     private String owner;
     private String adress;
@@ -54,7 +43,10 @@ public class Place implements Serializable {
     private Rented rented;
     
     
-    @OneToMany(mappedBy = "place")
+    @ManyToOne (cascade = CascadeType.PERSIST)
+    private Zip zip;
+    
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
     List<User> users = new ArrayList();
     
     @OneToMany(mappedBy = "place")
@@ -169,6 +161,19 @@ public class Place implements Serializable {
         this.rented = rented;
     }
 
-    
+       /**
+     * @return the zip
+     */
+    public Zip getZip() {
+        return zip;
+    }
+
+    /**
+     * @param zip the zip to set
+     */
+    public void setZip(Zip zip) {
+        this.zip = zip;
+    }
+
     
 }
