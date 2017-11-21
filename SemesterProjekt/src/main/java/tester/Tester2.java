@@ -5,8 +5,11 @@
  */
 package tester;
 
+import entity.Zip;
+import enums.Pets;
+import enums.Rented;
+import facade.PlaceFacade;
 import facade.UserFacade;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -19,8 +22,15 @@ public class Tester2 {
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
+        PlaceFacade pf = new PlaceFacade(emf);
+        
+        Zip zip = new Zip();
+        zip.setZipCode(2635);
+       
         
         uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+        
+        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
         
         
     }
