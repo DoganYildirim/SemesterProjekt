@@ -26,12 +26,12 @@ public class Tester2 {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
         PlaceFacade pf = new PlaceFacade(emf);
-        
+        Place place = new Place();
         Zip zip = new Zip();
         zip.setZipCode(2000);
        
         
-//        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805",place);
 //        
 //        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
 //        
