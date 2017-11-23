@@ -21,8 +21,7 @@ import javax.persistence.Query;
  */
 public class PlaceFacade {
 
-     public PlaceFacade(EntityManagerFactory emf)
-    {
+     public PlaceFacade(EntityManagerFactory emf){
         this.emf = emf;
     }
     
@@ -31,13 +30,11 @@ public class PlaceFacade {
     EntityManager em = emf.createEntityManager();
     EntityManager emUpdate = emf.createEntityManager();
 
-    public EntityManager getEntityManagerUpdate()
-    {
+    public EntityManager getEntityManagerUpdate(){
         return emfUpdate.createEntityManager();
     }
 
-    public EntityManager getEntityManager()
-    {
+    public EntityManager getEntityManager(){
         return emf.createEntityManager();
     }
     
@@ -99,8 +96,6 @@ public class PlaceFacade {
         Query query = em.createQuery("Select p from Place as p", Place.class);
         List <Place> places = query.getResultList();
         return places;
-        
-        
         
     }
     
