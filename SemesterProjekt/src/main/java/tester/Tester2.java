@@ -5,18 +5,12 @@
  */
 package tester;
 
-<<<<<<< HEAD
-import entity.User;
-=======
-import entity.Place;
 import entity.Zip;
 import enums.Pets;
 import enums.Rented;
+import facade.LocationFacade;
 import facade.PlaceFacade;
->>>>>>> origin/master
 import facade.UserFacade;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -30,18 +24,30 @@ public class Tester2 {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
         PlaceFacade pf = new PlaceFacade(emf);
+        LocationFacade fa = new LocationFacade();
         
-<<<<<<< HEAD
-       uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
-       List<User> listen = new ArrayList();
-       listen = uf.getAllUsers();
-        System.out.println("mennesker der er så mange " + listen.size());
-=======
+       fa.createLocation("Christiansborg", "Dansk historie");
+        fa.createLocation("Dansk Dansk", "Kanalrundfart");
+       // fa.deleteLocation("Kanalrundfart");
+        
+        
+        
         Zip zip = new Zip();
         zip.setZipCode(2000);
        
         
-//        uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+       uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
+       uf.createUser("Børge", "jens", "userjens", "999", "detErGanskeVidst@hotmail.com", "18051805");
+       uf.createUser("Adam", "Adnersen", "useradam", "000", "detErGanskeVidst@hotmail.com", "18051805");
+       
+      // uf.deleteuser(1);
+       
+       //pf.CreatePlace("marco", "ishøj", "12", "12", "det vildeste", Pets.JA, Rented.NEJ, zip);
+       pf.CreatePlacetwo("jens", "hallo", "23","45", "meget flot");
+       uf.getUserByID(1);
+       
+       
+        System.out.println(uf.getAllUsers().toString());
 //        
 //        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
 //        
@@ -54,14 +60,10 @@ public class Tester2 {
 //        }
 
 //pf.deletePlace(1);
-pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
->>>>>>> origin/master
+//pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
         
-        for (int i = 0; i < listen.size(); i++)
-        {
-            System.out.println(listen.get(i).getfName());
-        }
+
+
+
     }
 }
-
-
