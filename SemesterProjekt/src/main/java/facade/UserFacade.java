@@ -5,7 +5,6 @@
  */
 package facade;
 
-import entity.Place;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,9 +16,11 @@ import javax.persistence.Query;
  *
  * @author Peter Riis
  */
-public class UserFacade{
+public class UserFacade
+{
 
-    public UserFacade(EntityManagerFactory emf){
+    public UserFacade(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
@@ -28,15 +29,18 @@ public class UserFacade{
     EntityManager em = emf.createEntityManager();
     EntityManager emUpdate = emf.createEntityManager();
 
-    public EntityManager getEntityManagerUpdate(){
+    public EntityManager getEntityManagerUpdate()
+    {
         return emfUpdate.createEntityManager();
     }
 
-    public EntityManager getEntityManager(){
+    public EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
-    public void createUser(String name, String lastName, String username, String password, String email, String phoneNo, Place place){
+    public void createUser(String name, String lastName, String username, String password, String email, String phoneNo)
+    {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
 
@@ -48,14 +52,33 @@ public class UserFacade{
         user.setPassword(password);
         user.setEmail(email);
         user.setPhoneNumber(phoneNo);
-        user.setPlace(place);
 
         em.persist(user);
         em.getTransaction().commit();
         em.close();
     }
+    
+    public User userLogin(String username, String password){
+       
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            User user = new User(username, password);
+            em.persist(user);
+            em.getTransaction().commit();
+            return user;
+            
+        }catch (Exception e){
+            return null;
+            
+        }finally{
+            em.close();
+        }
+                
+    }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers()
+    {
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select u from User as u", User.class);
@@ -63,4 +86,58 @@ public class UserFacade{
         return user;
 
     }
+    
+    public User deleteuser(String username){
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            User u = em.find(User.class, username);
+            em.remove(u);
+            em.getTransaction().commit();
+            return u;    
+        }finally{
+            em.close();
+        }
+                  
+    }
+    
+   public User edituser(User user){
+       EntityManager em = emf.createEntityManager();
+       try{
+           em.getTransaction().begin();
+           User u = em.find(User.class, user.getUserName());
+           if(user !=null){
+               u = user;
+               em.merge(u);
+               em.getTransaction().commit();
+               return u;
+           }
+                   }finally{
+           em.close();
+                            
+       }
+       return null;
+       
+   }
+   
+   
+   public User getUserByID(long id){
+       EntityManager em = emf.createEntityManager();
+       try{
+           em.getTransaction().begin();
+           User us = em.find(User.class, id);
+           em.getTransaction().commit();
+           return us;
+           
+       }finally{
+           em.close();
+       }
+       
+       
+   }
+   
+    
+    
+    
+    
 }

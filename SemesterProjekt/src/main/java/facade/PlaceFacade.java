@@ -26,7 +26,7 @@ public class PlaceFacade {
         this.emf = emf;
     }
     
-   EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
     EntityManagerFactory emfUpdate = Persistence.createEntityManagerFactory("PU");
     EntityManager em = emf.createEntityManager();
     EntityManager emUpdate = emf.createEntityManager();
@@ -41,8 +41,35 @@ public class PlaceFacade {
         return emf.createEntityManager();
     }
     
-    public void CreatePlace(String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip){
+    
+    
+    public void CreatePlacetwo(String owner, String adress, String numberOfRooms, String numberOfPersons, String description){
+        try{
+            
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
         
+        Place place= new Place();
+        
+        place.setOwner(owner);
+        place.setAdress(adress);
+        place.setNumberOfRooms(numberOfRooms);
+        place.setNumberOfPersons(numberOfPersons);
+        place.setDescription(description);
+        
+       em.persist(place);
+        em.getTransaction().commit();
+        }finally{
+           em.close();
+        }
+
+    }
+    
+    
+    
+    public void CreatePlace(String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip){
+        try{
+            
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         
@@ -57,9 +84,11 @@ public class PlaceFacade {
         place.setRented(rented);
         place.setZip(zip);
         
-        em.persist(place);
+       em.persist(place);
         em.getTransaction().commit();
-        em.close();
+        }finally{
+           em.close();
+        }
 
     }
     
