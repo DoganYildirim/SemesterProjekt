@@ -5,12 +5,13 @@
  */
 package tester;
 
+import entity.User;
 import entity.Zip;
-import enums.Pets;
-import enums.Rented;
-import facade.LocationFacade;
 import facade.PlaceFacade;
 import facade.UserFacade;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -19,35 +20,24 @@ import javax.persistence.Persistence;
  * @author Peter Riis
  */
 public class Tester2 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU");
         UserFacade uf = new UserFacade(emf);
         PlaceFacade pf = new PlaceFacade(emf);
-        LocationFacade fa = new LocationFacade();
-        
-       fa.createLocation("Christiansborg", "Dansk historie");
-        fa.createLocation("Dansk Dansk", "Kanalrundfart");
-       // fa.deleteLocation("Kanalrundfart");
-        
-        
         
         Zip zip = new Zip();
         zip.setZipCode(2000);
        
+        User user = new User();
         
-       uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
-       uf.createUser("Børge", "jens", "userjens", "999", "detErGanskeVidst@hotmail.com", "18051805");
-       uf.createUser("Adam", "Adnersen", "useradam", "000", "detErGanskeVidst@hotmail.com", "18051805");
-       
-      // uf.deleteuser(1);
-       
-       //pf.CreatePlace("marco", "ishøj", "12", "12", "det vildeste", Pets.JA, Rented.NEJ, zip);
-       pf.CreatePlacetwo("jens", "hallo", "23","45", "meget flot");
-       uf.getUserByID(1);
-       
-       
-        System.out.println(uf.getAllUsers().toString());
+        
+        File file = new File("");
+        byte [] picInBytes = new byte[(int) file.length()];
+        uf.createUser("manden", "mandigsen", "user", "1234", "mandligfyr@hotmail.com", "88888888", picInBytes);
+        
+        
+      // uf.createUser("Hans Christian", "Andersen", "user", "1234", "detErGanskeVidst@hotmail.com", "18051805");
 //        
 //        pf.CreatePlace("Den danske stat","Perkerbakken 5", "4", "200", "Asylansøgere hele banden",Pets.JA, Rented.NEJ,zip );
 //        
@@ -62,8 +52,5 @@ public class Tester2 {
 //pf.deletePlace(1);
 //pf.editPlace(2, "Dogan Yildirim", "Ishøj", "4", "4", "Pure Royalty", Pets.NEJ, Rented.JA, zip);
         
-
-
-
     }
 }
