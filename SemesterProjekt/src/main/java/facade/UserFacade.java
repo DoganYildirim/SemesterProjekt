@@ -16,11 +16,9 @@ import javax.persistence.Query;
  *
  * @author Peter Riis
  */
-public class UserFacade
-{
+public class UserFacade{
 
-    public UserFacade(EntityManagerFactory emf)
-    {
+    public UserFacade(EntityManagerFactory emf){
         this.emf = emf;
     }
 
@@ -29,29 +27,33 @@ public class UserFacade
     EntityManager em = emf.createEntityManager();
     EntityManager emUpdate = emf.createEntityManager();
 
-    public EntityManager getEntityManagerUpdate()
-    {
+    public EntityManager getEntityManagerUpdate(){
         return emfUpdate.createEntityManager();
     }
 
-    public EntityManager getEntityManager()
-    {
+    public EntityManager getEntityManager(){
         return emf.createEntityManager();
     }
 
-    public void createUser(String name, String lastName, String username, String password, String email, String phoneNo)
-    {
+    public void createUser(String name, String lastName, String username, String password, String email, String phoneNo, byte[] picInBytes) throws FileNotFoundException, IOException {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
 
         User user = new User();
 
-        user.setfirstName(name);
-        user.setlastName(lastName);
+        user.setFirstName(name);
+        user.setLastName(lastName);
         user.setUserName(username);
         user.setPassword(password);
         user.setEmail(email);
         user.setPhoneNumber(phoneNo);
+
+        File file = new File("C:\\Users\\Peter Riis\\Desktop\\maymays\\Doggos\\hqdefault.jpg");
+        picInBytes = new byte[(int) file.length()];
+        FileInputStream fileInputStream = new FileInputStream(file);
+        fileInputStream.read(picInBytes);
+        fileInputStream.close();
+        user.setProfilePic(picInBytes);
 
         em.persist(user);
         em.getTransaction().commit();
@@ -77,8 +79,7 @@ public class UserFacade
                 
     }
 
-    public List<User> getAllUsers()
-    {
+    public List<User> getAllUsers(){
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("select u from User as u", User.class);
