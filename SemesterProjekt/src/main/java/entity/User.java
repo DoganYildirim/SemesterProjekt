@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Place place;
 
 
@@ -36,8 +36,20 @@ public class User implements Serializable {
     private String password;
     private String email;
     private String PhoneNumber;
+    
     @OneToMany(mappedBy = "user")
     List <UserPicture> userPicture = new ArrayList();
+
+   
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User() {
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -130,14 +142,6 @@ public class User implements Serializable {
     public void setPhoneNumber(String PhoneNumber) {
         this.PhoneNumber = PhoneNumber;
     }
-    public Place getPlace() {
-        return place;
-    }
 
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-    
-}
     
 }

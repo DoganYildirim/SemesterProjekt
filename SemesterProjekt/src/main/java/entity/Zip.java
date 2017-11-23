@@ -7,8 +7,8 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +30,12 @@ public class Zip implements Serializable {
     @OneToMany(mappedBy = "zip")
     List <Place> places = new ArrayList();
 
+    public Zip() {
+    }
+
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -48,8 +54,9 @@ public class Zip implements Serializable {
     /**
      * @param zipCode the zipCode to set
      */
-    public void setZipCode(int zipCode) {
+    public int setZipCode(int zipCode) {
         this.zipCode = zipCode;
+        return zipCode;
     }
 
 

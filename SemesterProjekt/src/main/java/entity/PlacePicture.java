@@ -28,8 +28,20 @@ public class PlacePicture implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Blob placePicture;
+
+   
+    
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
     
 
+    
+    
     public Long getId() {
         return id;
     }

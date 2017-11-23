@@ -41,12 +41,38 @@ public class Place implements Serializable {
     private String description;
     private Pets pets;
     private Rented rented;
+
+    public Place() {
+    }
+
+    public Place(String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip) {
+        this.owner = owner;
+        this.adress = adress;
+        this.numberOfRooms = numberOfRooms;
+        this.numberOfPersons = numberOfPersons;
+        this.description = description;
+        this.pets = pets;
+        this.rented = rented;
+        this.zip = zip;
+    }
+
+    
+    public Place(String owner, String adress, String numberOfRooms, String numberOfPersons) {
+        this.owner = owner;
+        this.adress = adress;
+        this.numberOfRooms = numberOfRooms;
+        this.numberOfPersons = numberOfPersons;
+    }
+    
+    
+    
+    
     
     
     @ManyToOne (cascade = CascadeType.PERSIST)
     private Zip zip;
     
-    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "place")
     List<User> users = new ArrayList();
     
     @OneToMany(mappedBy = "place")
