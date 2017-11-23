@@ -62,15 +62,15 @@ public class User implements Serializable {
     /**
      * @return the fName
      */
-    public String getfName() {
+    public String getfirstName() {
         return firstName;
     }
 
     /**
      * @param fName the fName to set
      */
-    public void setfirstName(String fName) {
-        this.firstName = fName;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -83,8 +83,8 @@ public class User implements Serializable {
     /**
      * @param lName the lName to set
      */
-    public void setlastName(String lName) {
-        this.lastName = lName;
+    public void setlastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
