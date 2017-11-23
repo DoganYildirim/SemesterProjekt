@@ -64,7 +64,7 @@ public class PlaceFacade {
     
     
     
-    public void CreatePlace(String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip){
+    public void createPlace(String owner, String adress, String numberOfRooms, String numberOfPersons, String description, Pets pets, Rented rented, Zip zip){
         try{
             
         EntityManager em = getEntityManager();
