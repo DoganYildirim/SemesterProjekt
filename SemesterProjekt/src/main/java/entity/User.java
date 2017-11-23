@@ -6,14 +6,13 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,6 +21,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class User implements Serializable {
 
+    public User() {
+    }
+
+    
+    
     @ManyToOne
     private Place place;
 
@@ -35,21 +39,10 @@ public class User implements Serializable {
     private String userName;
     private String password;
     private String email;
-    private String PhoneNumber;
-    
-    @OneToMany(mappedBy = "user")
-    List <UserPicture> userPicture = new ArrayList();
-
-   
-    public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
-
-    public User() {
-    }
-    
-    
+    private String phoneNumber;
+    @Lob
+    @Column(name = "profilepic")
+    private byte[] profilePic;
 
     public Long getId() {
         return id;
@@ -62,29 +55,29 @@ public class User implements Serializable {
     /**
      * @return the fName
      */
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
     /**
      * @param fName the fName to set
      */
-    public void setfirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String fName) {
+        this.firstName = fName;
     }
 
     /**
      * @return the lName
      */
-    public String getlastName() {
+    public String getLastName() {
         return lastName;
     }
 
     /**
      * @param lName the lName to set
      */
-    public void setlastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lName) {
+        this.lastName = lName;
     }
 
     /**
@@ -133,15 +126,24 @@ public class User implements Serializable {
      * @return the PhoneNumber
      */
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     /**
      * @param PhoneNumber the PhoneNumber to set
      */
     public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+    }
+    
+    
     
 }
