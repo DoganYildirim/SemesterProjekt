@@ -40,7 +40,7 @@ public class PlaceFacade {
     
     
     
-    public void CreatePlacetwo(String owner, String adress, String numberOfRooms, String numberOfPersons, String description){
+    public void createPlacetwo(String owner, String adress, String numberOfRooms, String numberOfPersons, String description){
         try{
             
         EntityManager em = getEntityManager();
