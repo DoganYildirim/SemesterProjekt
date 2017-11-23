@@ -5,11 +5,15 @@
  */
 package facade;
 
+import entity.Place;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import entity.User;
+import entity.Zip;
+import enums.Pets;
+import enums.Rented;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,13 +43,13 @@ public class UserFacade{
         return emf.createEntityManager();
     }
 
-    public void createUser(String name, String lastName, String username, String password, String email, String phoneNo, byte[] picInBytes) throws FileNotFoundException, IOException {
+    public void createUser(String firstName, String lastName, String username, String password, String email, String phoneNo, byte[] picInBytes) throws FileNotFoundException, IOException {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
 
         User user = new User();
 
-        user.setFirstName(name);
+        user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(username);
         user.setPassword(password);
@@ -92,38 +96,33 @@ public class UserFacade{
 
     }
     
-    public User deleteuser(String username){
-        EntityManager em = emf.createEntityManager();
-        try{
-            em.getTransaction().begin();
-            User u = em.find(User.class, username);
-            em.remove(u);
-            em.getTransaction().commit();
-            return u;    
-        }finally{
-            em.close();
-        }
-                  
+      public void deleteUser(long id){
+        EntityManager em = getEntityManager();
+        
+        em.getTransaction().begin();
+        Query query = em.createQuery("DELETE FROM  User u Where u.id = :ID");
+        query.setParameter("ID", id).executeUpdate();
+        
+        em.getTransaction().commit();
+        em.close();
     }
     
-   public User edituser(User user){
-       EntityManager em = emf.createEntityManager();
-       try{
-           em.getTransaction().begin();
-           User u = em.find(User.class, user.getUserName());
-           if(user !=null){
-               u = user;
-               em.merge(u);
-               em.getTransaction().commit();
-               return u;
-           }
-                   }finally{
-           em.close();
-                            
-       }
-       return null;
+    public void editUser(long id,String firstName, String lastName, String username, String password, String email, String phoneNo, byte[] picInBytes){
+       EntityManager em = getEntityManager();
+       em.getTransaction().begin();
+       User user = em.find(User.class, id);
+       user.setFirstName(firstName);
+       user.setLastName(lastName);
+       user.setUserName(username);
+       user.setPassword(password);
+       user.setEmail(email);
+       user.setPhoneNumber(phoneNo);
+       user.setProfilePic(picInBytes);
        
-   }
+        em.getTransaction().commit();
+        em.close();
+          
+    }
    
    
    public User getUserByID(long id){
