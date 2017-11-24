@@ -7,7 +7,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import static entity.Location_.name;
 import entity.Place;
+import enums.Pets;
+import enums.Rented;
 import facade.PlaceFacade;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +70,23 @@ public class PlaceResource
     /**
      * PUT method for updating or creating an instance of PlaceResource
      *
+     * @param id
      * @param content representation for the resource
      */
     @PUT
-    @Path("edit")
+    @Path("\"/{id}\"")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content)
+    public void editPlace(@PathParam("id")int id)
     {
+        PlaceFacade pf = new PlaceFacade(emf);
+        Place p = pf.getPlaceByName("name");
+        
+        pf.editPlace(
+               0, p.getOwner(), p.getAdress(),
+                p.getNumberOfRooms(), p.getNumberOfPersons(),
+                p.getDescription(), p.getPets(),
+                p.getRented(), p.getZip()
+        );
     }
 
     @POST
