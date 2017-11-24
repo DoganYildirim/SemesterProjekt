@@ -111,7 +111,7 @@ public class UserResource {
     @PUT
     @Path("\"/{id}\"")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(@PathParam("id")int id) {
+    public void editUser(@PathParam("id")int id) {
 
         UserFacade uf = new UserFacade(emf);
         User u = uf.getUserByID(id);
