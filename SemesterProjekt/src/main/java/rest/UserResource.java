@@ -79,15 +79,29 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String createUser(String content) throws IOException
-    {
+    public String createUser(String content) throws IOException{
         UserFacade uf = new UserFacade(emf);
         User u = gson.fromJson(content, User.class);
-        
         uf.createUser(
         u.getFirstName(), u.getLastName(),
         u.getUserName(), u.getPassword(), u.getEmail(),
         u.getPhoneNumber(), u.getProfilePic()
+        );
+        
+        return gson.toJson(u);
+    }
+    
+    
+    @Path("createUserTest")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createUserTest(String content) throws IOException{
+        UserFacade uf = new UserFacade(emf);
+        User u = gson.fromJson(content, User.class);
+        System.out.println(u.getFirstName());
+        uf.createUser(
+        u.getFirstName()
         );
         
         return gson.toJson(u);
