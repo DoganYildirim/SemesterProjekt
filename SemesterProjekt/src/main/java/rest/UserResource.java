@@ -50,8 +50,8 @@ public class UserResource {
      * Retrieves representation of an instance of rest.UserResource
      * @return an instance of java.lang.String
      */
-    @GET
     @Path("getUsers")
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllUsers() {
         
@@ -63,11 +63,11 @@ public class UserResource {
     
     }
     
+    @Path("getUserByID/{id}")
     @GET
-    @Path("getUserByID")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUserByID(@PathParam("id") int id) {
-        
+        System.out.println(id);    
     UserFacade uf = new UserFacade(emf);
     User user = new User();
     user = uf.getUserByID(id);
@@ -75,8 +75,8 @@ public class UserResource {
     return result;
     }
     
-    @POST
     @Path("createUser")
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String createUser(String content) throws IOException
@@ -93,8 +93,8 @@ public class UserResource {
         return gson.toJson(u);
     }
     
+    @Path("deleteUser/{id}")
     @DELETE
-    @Path("\"/{id}\"")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteUser(@PathParam("id")int id){
@@ -108,8 +108,8 @@ public class UserResource {
      * PUT method for updating or creating an instance of UserResource
      * @param content representation for the resource
      */
+    @Path("editUser/{id}")
     @PUT
-    @Path("\"/{id}\"")
     @Consumes(MediaType.APPLICATION_JSON)
     public void editUser(@PathParam("id")int id) {
 
